@@ -19,7 +19,7 @@ public class App {
      */
     public static void main(String[] args) throws Exception {
         // TODO code application logic here
-         String msg = "1+2x^2-4x^";
+         String msg = "-x^6";
         SimpleParser simpleParser = new SimpleParser(msg);
         simpleParser.Expr();
         System.out.println("Success");

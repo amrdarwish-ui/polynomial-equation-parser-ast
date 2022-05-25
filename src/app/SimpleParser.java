@@ -59,6 +59,10 @@ public class SimpleParser {
                 E();
                 eat(Type.EOF);
                 break;
+            case MIN:
+                E();
+                eat(Type.EOF);
+                break;
             default:
                 Error("unexpected token");
 
@@ -76,6 +80,10 @@ public class SimpleParser {
             case X:
                 T();
                 E_prime();
+                break;
+            case MIN:
+                eat(Type.MIN);
+                T();
                 break;
             default:
                 Error("unexpected token");
