@@ -48,6 +48,7 @@ public class SimpleParser {
     }
     
     
+    // Expr ---> E $
     public void Expr() throws Exception{
         Token nt = getNextToken();
         switch(nt.type){
@@ -70,71 +71,81 @@ public class SimpleParser {
     }
     
     
-    public void E() throws Exception{
+    // E --> T E` || E--> - E
+    public AST.Expr E() throws Exception{
         Token nt = getNextToken();
+        AST.Expr root = null, left = null;
         switch(nt.type){
             case NUM:
-                T();
-                E_prime();
+                left = T();
+                root = E_prime(left);
                 break;
             case X:
-                T();
-                E_prime();
+                left = T();
+                root = E_prime(left);
                 break;
             case MIN:
                 eat(Type.MIN);
-                T();
+                root = E();
+                root = new AST.UnaryMin(root);
                 break;
             default:
                 Error("unexpected token");
-
         }
-        
+        return root;
     }
-    
- 
-     public void E_prime() throws Exception{
+
+
+    // E` --> + T E` || E` --> - T E` || E` --> $ (lamda)
+    public AST.Expr E_prime(AST.Expr left) throws Exception{
         Token nt = getNextToken();
+        AST.Expr root = null, right = null;
         switch(nt.type){
             case ADD:
                 eat(Type.ADD);
-                E();
+                right = T();
+                left = new AST.AddExpr(left, right);
+                root = E_prime(left);
                 break;
             case MIN:
                 eat(Type.MIN);
-                E();
+                right = T();
+                left = new AST.MinExpr(left, right);
+                root = E_prime(left);
                 break;
             case EOF:
+                root = left;
                 break;
             default:
                 Error("unexpected token");
-
         }
-        
+        return root;
     }
-     
-     
-      public void T() throws Exception{
+
+
+    // T --> F T`
+    public AST.Expr T() throws Exception{
         Token nt = getNextToken();
+        AST.Expr root = null, left = null;
         switch(nt.type){
             case NUM:
-                F();
-                T_prime();
+                left = F();
+                root = T_prime(left);
                 break;
             case X:
-                F();
-                T_prime();
+                left = F();
+                root = T_prime(left);
                 break;
             default:
                 Error("unexpected token");
-
         }
-        
+        return root;
     }
-      
-      //T_prime=>$        T_prime => *T
-      public void T_prime() throws Exception{
+
+      // T` --> T || T` --> $
+      public AST.Expr T_prime(AST.Expr left) throws Exception{
         Token nt = getNextToken();
+        AST.Expr root = null, right = null;
         switch(nt.type){
             case NUM:
                 T();
