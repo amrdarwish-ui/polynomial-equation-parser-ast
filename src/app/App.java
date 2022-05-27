@@ -19,9 +19,13 @@ public class App {
      */
     public static void main(String[] args) throws Exception {
         // TODO code application logic here
-         String msg = "-2-3x^2+4";
+         String msg = "-2+3x-x^4+5";
         SimpleParser simpleParser = new SimpleParser(msg);
-        simpleParser.Expr();
+        //simpleParser.Expr();
+        AST.Expr root = simpleParser.Expr();
+        System.out.println("toString: " + root);
+        System.out.println("prefix: " + root.prefix());
+        System.out.println("postfix: " + root.postfix());
         System.out.println("Success");
     }
     
