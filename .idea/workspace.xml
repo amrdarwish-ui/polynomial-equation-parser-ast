@@ -2,12 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bc0a3761-54a8-4b2a-b6d9-0d57227e19de" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nbproject/private/private.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nbproject/private/private.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/formal_language_project/app/AST$AddExpr.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/formal_language_project/app/AST$AddExpr.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/formal_language_project/app/AST$Expr.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/formal_language_project/app/AST$Expr.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/formal_language_project/app/AST$HatExpr.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/formal_language_project/app/AST$HatExpr.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/formal_language_project/app/AST$MinExpr.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/formal_language_project/app/AST$MinExpr.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/formal_language_project/app/AST$NumExpr.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/formal_language_project/app/AST$NumExpr.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/formal_language_project/app/AST$XExpr.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/formal_language_project/app/AST$XExpr.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/formal_language_project/app/App.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/formal_language_project/app/App.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/AST.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/AST.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/App.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/SimpleParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/SimpleParser.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,5 +76,20 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/app/App.java</url>
+          <line>19</line>
+          <properties class="app.App" method="main">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
