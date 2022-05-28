@@ -49,25 +49,26 @@ public class SimpleParser {
     
     
     // Expr ---> E $
-    public void Expr() throws Exception{
+    public AST.Expr Expr() throws Exception{
         Token nt = getNextToken();
+        AST.Expr root = null;
         switch(nt.type){
             case NUM:
-                E();
+                root = E();
                 eat(Type.EOF);
                 break;
             case X:
-                E();
+                root = E();
                 eat(Type.EOF);
                 break;
             case MIN:
-                E();
+                root = E();
                 eat(Type.EOF);
                 break;
             default:
                 Error("unexpected token");
-
         }
+        return root;
     }
     
     
@@ -87,9 +88,10 @@ public class SimpleParser {
             case MIN:
                 eat(Type.MIN);
                 root = E();
-                root = new AST.UnaryMin(root);
+                root = new AST.MinExpr(left, root);
                 break;
             default:
+                System.out.println("The token is:" + nt.symbol);
                 Error("unexpected token");
         }
         return root;
@@ -142,83 +144,99 @@ public class SimpleParser {
         return root;
     }
 
-      // T` --> T || T` --> $
+      // T` --> F T` || T` --> $
       public AST.Expr T_prime(AST.Expr left) throws Exception{
         Token nt = getNextToken();
         AST.Expr root = null, right = null;
         switch(nt.type){
             case NUM:
-                T();
+                right = F();
+                left = new AST.NumExpr(nt.symbol);
+                root = T_prime(left);
                 break;
             case X:
-                T();
+                right = F();
+                left = new AST.XExpr(left, right);
+                root = T_prime(left);
                 break;
             case ADD:
+                root = left;
                 break;
             case MIN:
+                root = left;
                 break;
             case EOF:
+                root = left;
                 break;
-                
-                
             default:
                 Error("unexpected token");
-
         }
-        
+        return root;
     }
     
-    public void F() throws Exception{
+    // F --> D || F --> x F`
+    public AST.Expr F() throws Exception{
         Token nt = getNextToken();
+        AST.Expr root = null, left = null;
         switch(nt.type){
             case NUM:
-                D();
+                left = D();
+                root = left;
                 break;
             case X:
                 eat(Type.X);
-                F_prime();
+                left = new AST.NumExpr(nt.symbol);
+                root = F_prime(left);
                 break;
             default:
                 Error("unexpected token");
-
         }
-        
+        return root;
     }
     
-    public void F_prime() throws Exception{
+    // F` --> ^ D || F` --> $
+    public AST.Expr F_prime(AST.Expr left) throws Exception{
         Token nt = getNextToken();
+        AST.Expr root = null, right = null;
         switch(nt.type){
             case NUM:
+                root = left;
                 break;
             case X:
+                root = left;
                 break;
             case ADD:
+                root = left;
                 break;
             case MIN:
+                root = left;
                 break;
             case HAT:
                 eat(Type.HAT);
-                D();
+                right = D();
+                root = new AST.HatExpr(left, right);
+                break;
             case EOF:
+                root = left;
                 break;
             default:
                 Error("unexpected token");
-
         }
-        
+        return root;
     }
-    public void D() throws Exception{
+    // D --> {0, 1, ..., 9}
+    public AST.Expr D() throws Exception{
         Token nt = getNextToken();
+        AST.Expr root = null;
         switch(nt.type){
             case NUM:
                 eat(Type.NUM);
+                root = new AST.NumExpr(nt.symbol);
                 break;
-            
             default:
                 Error("unexpected token");
-
         }
-        
+        return root;
     }
     
     
